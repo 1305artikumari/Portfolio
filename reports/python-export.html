@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Export Report</title>
+  <style>
+    body { margin:0; font-family: Georgia, serif; background:#07090d; color:#eef2f7; }
+    main { max-width: 920px; margin: 0 auto; padding: 48px 24px 80px; }
+    h1,h2 { font-weight: 600; }
+    a { color:#3ee0b2; }
+    .muted { color:#8b97a8; }
+    .card { background:#10151f; border:1px solid #1d2633; border-radius:18px; padding:24px; margin:22px 0; }
+    .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; }
+    .kpi { background:#0b0f16; border-radius:12px; padding:14px; }
+    .kpi b { display:block; font-size:22px; color:#3ee0b2; }
+    img { width:100%; border-radius:14px; margin-top:14px; }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    ul { line-height:1.7; }
+    @media (max-width: 720px) { .split { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="muted">Python export · Data Analyst + Data Scientist</p>
+    <p><a href="../index.html">Back to portfolio</a></p>
+    <h1>Portfolio case-study report</h1>
+    <div class="card">
+      <h2>Retail Revenue Intelligence</h2>
+      <div class="kpis">
+        <div class="kpi"><span class="muted">Revenue</span><b>$3.85M</b></div>
+        <div class="kpi"><span class="muted">Orders</span><b>35,962</b></div>
+        <div class="kpi"><span class="muted">AOV</span><b>$107</b></div>
+        <div class="kpi"><span class="muted">Repeat rate</span><b>52%</b></div>
+      </div>
+      <img src="../assets/charts/analyst-revenue.png" alt="Revenue trend" />
+      <div class="split">
+        <img src="../assets/charts/analyst-category.png" alt="Category mix" />
+        <img src="../assets/charts/analyst-rfm.png" alt="RFM segments" />
+      </div>
+      <ul><li>Electronics leads revenue mix and should stay the hero assortment.</li><li>Repeat purchase rate is 52%; loyalty offers can lift mid-tier RFM segments.</li><li>Weekend demand is structurally higher — shift paid media and staffing toward Friday-Sunday.</li><li>At-risk customers are recoverable with win-back campaigns triggered at 45+ days of inactivity.</li></ul>
+    </div>
+    <div class="card">
+      <h2>Customer Churn Prediction</h2>
+      <div class="kpis">
+        <div class="kpi"><span class="muted">Model</span><b>Logistic Regression</b></div>
+        <div class="kpi"><span class="muted">ROC-AUC</span><b>0.820</b></div>
+        <div class="kpi"><span class="muted">Recall</span><b>69%</b></div>
+        <div class="kpi"><span class="muted">F1</span><b>0.65</b></div>
+      </div>
+      <img src="../assets/charts/scientist-roc.png" alt="ROC curve" />
+      <div class="split">
+        <img src="../assets/charts/scientist-features.png" alt="Feature importance" />
+        <img src="../assets/charts/scientist-confusion.png" alt="Confusion matrix" />
+      </div>
+      <ul><li>Month-to-month contracts and electronic-check payers are the highest-risk cohort.</li><li>Tenure is protective: intervention in the first 6 months yields the largest lift.</li><li>Missing tech support plus rising ticket volume is a strong early-warning signal.</li><li>Logistic Regression is the production candidate; the operating threshold is tuned for F1, not the default 0.50.</li></ul>
+    </div>
+  </main>
+</body>
+</html>

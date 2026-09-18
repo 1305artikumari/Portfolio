@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arti Kumari — Resume</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="resume-page">
+  <div class="resume" style="text-align:center;">
+    <h1>Downloading resume…</h1>
+    <p>If the download does not start, use the button below.</p>
+    <p><a class="btn btn-primary" href="assets/Arti_Resume.pdf" download="Arti_Resume.pdf">Download Arti_Resume.pdf</a></p>
+    <p><a class="btn btn-outline" href="index.html">Back to portfolio</a></p>
+  </div>
+  <script>
+    const link = document.createElement("a");
+    link.href = "assets/Arti_Resume.pdf";
+    link.download = "Arti_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  </script>
+</body>
+</html>
