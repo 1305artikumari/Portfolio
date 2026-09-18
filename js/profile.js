@@ -3,7 +3,6 @@ window.PROFILE = {
   role: "Data Analyst & Data Scientist",
   location: "India",
   email: "youremail@gmail.com",
-  phone: "+91 00000 00000",
   linkedin: "https://www.linkedin.com/",
   github: "https://github.com/",
   resume: "resume.html",
