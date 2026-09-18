@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ".section, .project, .work-card, .edu-card, .goals li, .skill, .stat-card"
   );
   targets.forEach((el) => {
-    el.classList.add("in"); // Ensure visible right away
+    el.classList.add("in");
     observer.observe(el);
   });
 
-  // Contact Form AJAX Handler (Works inside iframes & on all web browsers)
+  // Contact Form AJAX Handler -> Sends directly to artikumari09011999@gmail.com
   const contactForm = document.getElementById("contact-form");
   const contactSubmit = document.getElementById("contact-submit");
   const contactStatus = document.getElementById("contact-status");
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (contactSubmit) {
         contactSubmit.disabled = true;
-        contactSubmit.textContent = "Sending message...";
+        contactSubmit.textContent = "⏳ Sending to email...";
       }
 
       try {
@@ -107,7 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify({
             name: name,
             email: email,
-            _subject: `Portfolio Message: ${subject} from ${name}`,
+            _subject: `Portfolio Inquiry: ${subject} from ${name}`,
+            _replyto: email,
+            _template: "table",
+            _captcha: "false",
             message: message,
           }),
         });
@@ -118,32 +121,38 @@ document.addEventListener("DOMContentLoaded", () => {
           contactForm.innerHTML = `
             <div style="background: rgba(62, 224, 178, 0.12); border: 1px solid rgba(62, 224, 178, 0.4); border-radius: 14px; padding: 24px; text-align: center; margin-top: 10px;">
               <h3 style="color: #3ee0b2; margin: 0 0 8px;">✅ Message Sent Successfully!</h3>
-              <p style="color: #cbd5e1; margin: 0; line-height: 1.6;">
-                Thank you, <b>${name}</b>! Your message has been delivered directly to <b>artikumari09011999@gmail.com</b>. I will reply soon.
+              <p style="color: #cbd5e1; margin: 0 0 16px; line-height: 1.6;">
+                Thank you, <b>${name}</b>! Your message has been delivered directly to <b>artikumari09011999@gmail.com</b>.
               </p>
+              <a class="btn btn-outline" href="https://www.linkedin.com/in/arti-kumari2025/" target="_blank" rel="noreferrer" style="display:inline-flex; align-items:center; gap:8px;">
+                💬 Connect &amp; Chat on LinkedIn
+              </a>
             </div>
           `;
         } else {
           throw new Error("Submission failed");
         }
       } catch (err) {
-        // Graceful fallback to mailto link
+        // Fallback to direct mailto link
         const mailtoUrl = `mailto:artikumari09011999@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
         window.open(mailtoUrl, "_blank");
 
         if (contactStatus) {
           contactStatus.style.display = "block";
           contactStatus.innerHTML = `
-            <div style="background: rgba(232, 192, 122, 0.15); border: 1px solid rgba(232, 192, 122, 0.4); border-radius: 12px; padding: 14px; margin-top: 12px;">
-              <p style="color:#e8c07a; margin:0; font-size:0.9rem;">
-                Email app opened! You can also email directly to <a href="mailto:artikumari09011999@gmail.com" style="color:#3ee0b2; text-decoration:underline;">artikumari09011999@gmail.com</a>.
+            <div style="background: rgba(232, 192, 122, 0.15); border: 1px solid rgba(232, 192, 122, 0.4); border-radius: 12px; padding: 14px; margin-top: 12px; text-align:center;">
+              <p style="color:#e8c07a; margin:0 0 8px; font-size:0.9rem;">
+                Email app opened! You can also message directly on LinkedIn:
               </p>
+              <a class="btn btn-outline" href="https://www.linkedin.com/in/arti-kumari2025/" target="_blank" rel="noreferrer" style="display:inline-flex; align-items:center; gap:6px;">
+                💬 Message on LinkedIn
+              </a>
             </div>
           `;
         }
         if (contactSubmit) {
           contactSubmit.disabled = false;
-          contactSubmit.textContent = "Send message";
+          contactSubmit.textContent = "✉️ Send to Email";
         }
       }
     });

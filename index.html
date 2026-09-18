@@ -311,8 +311,11 @@
           <label><span>Email</span><input type="email" name="email" id="contact-email" placeholder="Your email address" required /></label>
           <label><span>Subject</span><input name="subject" id="contact-subject" value="Data Analyst / Data Scientist role" required /></label>
           <label><span>Message</span><textarea name="message" id="contact-message" rows="5" placeholder="Your message..." required></textarea></label>
-          <button class="btn btn-primary" type="submit" id="contact-submit">Send message</button>
-          <div id="contact-status" style="display:none;"></div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+            <button class="btn btn-primary" type="submit" id="contact-submit" style="flex:1; min-width:180px;">✉️ Send to Email</button>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/arti-kumari2025/" target="_blank" rel="noreferrer" style="flex:1; min-width:180px; display:inline-flex; align-items:center; justify-content:center; gap:8px;">💬 Message on LinkedIn</a>
+          </div>
+          <div id="contact-status" style="display:none; margin-top:12px;"></div>
         </form>
       </div>
     </section>
