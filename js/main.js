@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks?.classList.toggle("open");
   });
 
-  // Smooth scroll for internal anchor links (works in iframes and regular browser)
+  // Smooth scroll for internal anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href").slice(1);
@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Number Counter Animation
   function animateCount(node) {
+    if (node.dataset.done) return;
+    node.dataset.done = "1";
     const end = Number(node.dataset.count);
     const decimals = Number(node.dataset.decimals || 0);
     const suffix = node.dataset.suffix || "";
@@ -41,26 +43,30 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(tick);
   }
 
+  // Animate stat counters immediately if visible
+  document.querySelectorAll("[data-count]").forEach((el) => {
+    animateCount(el);
+  });
+
   // Intersection Observer for scroll animations
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("in");
-        if (entry.target.classList.contains("stat-card")) {
-          const value = entry.target.querySelector("[data-count]");
-          if (value && !value.dataset.done) {
-            value.dataset.done = "1";
-            animateCount(value);
-          }
-        }
+        const counter = entry.target.querySelector("[data-count]");
+        if (counter) animateCount(counter);
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.01, rootMargin: "100px 0px 100px 0px" }
   );
 
-  document
-    .querySelectorAll(".section, .project, .work-card, .edu-card, .goals li, .skill, .stat-card")
-    .forEach((el) => observer.observe(el));
+  const targets = document.querySelectorAll(
+    ".section, .project, .work-card, .edu-card, .goals li, .skill, .stat-card"
+  );
+  targets.forEach((el) => {
+    el.classList.add("in"); // Ensure visible right away
+    observer.observe(el);
+  });
 });

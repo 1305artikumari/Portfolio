@@ -473,9 +473,9 @@ h3 { margin: 0; letter-spacing: -0.02em; line-height: 1.2; }
 .project p { color: var(--muted); min-height: 72px; }
 .tag { color: var(--teal); margin: 0; font-size: 0.78rem; }
 .project, .work-card, .edu-card, .goals li, .section {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .project.in, .work-card.in, .edu-card.in, .goals li.in, .section.in {
   opacity: 1;
