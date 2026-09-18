@@ -306,12 +306,13 @@
           <li><span>GitHub</span><a href="https://github.com/1305artikumari" target="_blank" rel="noreferrer">github.com/1305artikumari</a></li>
           <li><span>Languages known</span><b>English, Hindi</b></li>
         </ul>
-        <form class="contact-form" action="mailto:artikumari09011999@gmail.com" method="get" enctype="text/plain">
-          <label><span>Name</span><input name="name" required /></label>
-          <label><span>Email</span><input type="email" name="email" required /></label>
-          <label><span>Subject</span><input name="subject" value="Data Analyst / Data Scientist role" required /></label>
-          <label><span>Message</span><textarea name="body" rows="5" required></textarea></label>
-          <button class="btn btn-primary" type="submit">Send message</button>
+        <form class="contact-form" id="contact-form">
+          <label><span>Name</span><input name="name" id="contact-name" placeholder="Your name" required /></label>
+          <label><span>Email</span><input type="email" name="email" id="contact-email" placeholder="Your email address" required /></label>
+          <label><span>Subject</span><input name="subject" id="contact-subject" value="Data Analyst / Data Scientist role" required /></label>
+          <label><span>Message</span><textarea name="message" id="contact-message" rows="5" placeholder="Your message..." required></textarea></label>
+          <button class="btn btn-primary" type="submit" id="contact-submit">Send message</button>
+          <div id="contact-status" style="display:none;"></div>
         </form>
       </div>
     </section>

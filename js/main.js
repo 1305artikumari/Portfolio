@@ -69,4 +69,83 @@ document.addEventListener("DOMContentLoaded", () => {
     el.classList.add("in"); // Ensure visible right away
     observer.observe(el);
   });
+
+  // Contact Form AJAX Handler (Works inside iframes & on all web browsers)
+  const contactForm = document.getElementById("contact-form");
+  const contactSubmit = document.getElementById("contact-submit");
+  const contactStatus = document.getElementById("contact-status");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("contact-name")?.value.trim() || "";
+      const email = document.getElementById("contact-email")?.value.trim() || "";
+      const subject = document.getElementById("contact-subject")?.value.trim() || "Portfolio Inquiry";
+      const message = document.getElementById("contact-message")?.value.trim() || "";
+
+      if (!name || !email || !message) {
+        if (contactStatus) {
+          contactStatus.style.display = "block";
+          contactStatus.innerHTML = '<p style="color:#ff7a90; margin-top:8px;">Please fill in all required fields.</p>';
+        }
+        return;
+      }
+
+      if (contactSubmit) {
+        contactSubmit.disabled = true;
+        contactSubmit.textContent = "Sending message...";
+      }
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/artikumari09011999@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            _subject: `Portfolio Message: ${subject} from ${name}`,
+            message: message,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok || result.success === "true" || result.success === true) {
+          contactForm.innerHTML = `
+            <div style="background: rgba(62, 224, 178, 0.12); border: 1px solid rgba(62, 224, 178, 0.4); border-radius: 14px; padding: 24px; text-align: center; margin-top: 10px;">
+              <h3 style="color: #3ee0b2; margin: 0 0 8px;">✅ Message Sent Successfully!</h3>
+              <p style="color: #cbd5e1; margin: 0; line-height: 1.6;">
+                Thank you, <b>${name}</b>! Your message has been delivered directly to <b>artikumari09011999@gmail.com</b>. I will reply soon.
+              </p>
+            </div>
+          `;
+        } else {
+          throw new Error("Submission failed");
+        }
+      } catch (err) {
+        // Graceful fallback to mailto link
+        const mailtoUrl = `mailto:artikumari09011999@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        window.open(mailtoUrl, "_blank");
+
+        if (contactStatus) {
+          contactStatus.style.display = "block";
+          contactStatus.innerHTML = `
+            <div style="background: rgba(232, 192, 122, 0.15); border: 1px solid rgba(232, 192, 122, 0.4); border-radius: 12px; padding: 14px; margin-top: 12px;">
+              <p style="color:#e8c07a; margin:0; font-size:0.9rem;">
+                Email app opened! You can also email directly to <a href="mailto:artikumari09011999@gmail.com" style="color:#3ee0b2; text-decoration:underline;">artikumari09011999@gmail.com</a>.
+              </p>
+            </div>
+          `;
+        }
+        if (contactSubmit) {
+          contactSubmit.disabled = false;
+          contactSubmit.textContent = "Send message";
+        }
+      }
+    });
+  }
 });
